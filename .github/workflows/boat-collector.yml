@@ -29,7 +29,8 @@ jobs:
             echo 'COLLECTOR_TOKEN repository secret is missing.' >&2
             exit 1
           fi
-          curl --fail-with-body --silent --show-error --retry 2 --retry-delay 3 --max-time 180 \
+          echo "Collector started at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          curl --fail-with-body --silent --show-error --retry-all-errors --retry 2 --retry-delay 3 --max-time 180 \
             --header "x-collector-token: $COLLECTOR_TOKEN" \
             'https://boatrace-ai-forecast.yoshinaga5454.chatgpt.site/api/collector' \
             --output collector-response.json
